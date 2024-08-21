@@ -2,7 +2,7 @@
   <div class="container my-5">
     <div class="weather-wrapper">
       <div
-        class="card shadow-lg p-5 rounded-4 glassmorphic-bg text-center weather-app"
+        class="card p-5 rounded-4 glassmorphic-bg text-center weather-app border-0"
       >
         <h2 class="card-title mb-4">Weather App</h2>
         <p class="card-text mb-4">
@@ -27,6 +27,7 @@
             </button>
           </div>
         </div>
+
         <div
           v-if="queryError"
           class="alert alert-warning text-center"
@@ -36,13 +37,12 @@
           {{ queryError }}
         </div>
 
-        <div v-if="loading" class="text-center my-4">
-          <div
-            class="spinner-border text-primary cinematic-loader"
-            role="status"
-          >
-            <span class="sr-only">Loading...</span>
-          </div>
+        <div
+          v-if="loading"
+          class="text-center my-4 d-flex justify-content-center align-items-center"
+        >
+          <div class="cinematic-loader" role="status"></div>
+          <span class="sr-only">Loading...</span>
         </div>
 
         <div v-if="error" class="alert alert-danger text-center" role="alert">
@@ -307,7 +307,7 @@ export default {
     toggleUnit(unit) {
       this.temperatureUnit = unit === "metric" ? "C" : "F";
       if (this.weather) {
-        this.fetchWeather(); // Re-fetch weather data with new unit
+        this.fetchWeather();
       }
     },
   },
@@ -363,7 +363,12 @@ body {
 
 /* Cinematic Loading Animation */
 .cinematic-loader {
-  animation: cinematicSpin 2s linear infinite;
+  width: 4rem;
+  height: 4rem;
+  border: 0.5rem solid rgba(255, 255, 255, 0.3); /* Light border */
+  border-top: 0.5rem solid #ffcc00; /* Holographic yellow */
+  border-radius: 50%;
+  animation: cinematicSpin 1s linear infinite;
 }
 
 @keyframes cinematicSpin {
